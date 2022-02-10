@@ -12,7 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using UniversityAPI.AutoMapperData;
 using UniversityAPI.Entities;
+using UniversityAPI.Services;
 
 namespace UniversityAPI
 {
@@ -32,6 +34,11 @@ namespace UniversityAPI
 
 
             services.AddScoped<UniversitySeeder>();
+
+            services.AddScoped<IHomeService, HomeService>();
+
+            services.AddSingleton(AutoMapperConfiguration.Initialize());
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

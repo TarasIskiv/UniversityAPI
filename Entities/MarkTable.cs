@@ -6,7 +6,9 @@ namespace UniversityAPI.Entities
     {
         [Key]
         public int Id {get; set;}
-        public virtual int StudentId {get; set;}
+        public int StudentId {get; set;}
+
+        public virtual Student Student {get; set;}
         [Required]
         public string Subject { get; set; }
         [Required]

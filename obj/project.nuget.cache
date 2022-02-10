@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Q2QsNHKpkrG2WfngUA1Ex03Gy6bn3VdCjuQYti8tJ8ibW77DlDxNk/xfbIbGH8SU/m9N8aHC2BPjQNZJxAkAEA==",
+  "dgSpecHash": "gIPuCiJ0wEpLpuqsPvQaZmOHQhKN67R/3W3q4B2u7SJDkzC/w4SNZDsVoMBR6oY6pT0l7uTGSrMNDH42DD35vQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\T450\\Desktop\\C#_projects\\.Net_Projects_VSCode\\VSCODE_PROJECTS_ON_GITHUB\\University\\UniversityAPI\\UniversityAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\T450\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.1\\automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.1\\microsoft.entityframeworkcore.5.0.1.nupkg.sha512",
@@ -32,6 +34,7 @@
     "C:\\Users\\T450\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512",
     "C:\\Users\\T450\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
   ],

@@ -21,9 +21,14 @@ namespace UniversityAPI.Entities
         
         [Required]
         public int CourseYear { get; set; }
-        public virtual int DirectionId {get; set;}
+        public int DirectionId {get; set;}
+
+        public virtual Direction Direction{get;set;}
+
         public virtual List<MarkTable> Marks{get; set;}
-        public virtual int GroupId {get; set;}
+        public int GroupId {get; set;}
+        public virtual Group Group{get; set;}
+        
         public double AverageMark { get; set; }
 
 

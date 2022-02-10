@@ -34,3 +34,5 @@ C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB
 C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\obj\Debug\net5.0\ref\UniversityAPI.dll
 C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\obj\Debug\net5.0\UniversityAPI.pdb
 C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\obj\Debug\net5.0\UniversityAPI.genruntimeconfig.cache
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
