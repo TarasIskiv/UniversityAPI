@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "XwLKEfM67Bh3QoIeo0Wvm2syrFnbbzlkALMMKZEMeA+UC6LFba0DttKz00QQ9jv6qudKPB2Z1b01UddQeh0QOA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\T450\\Desktop\\C#_projects\\.Net_Projects_VSCode\\VSCODE_PROJECTS_ON_GITHUB\\University\\UniversityAPI\\UniversityAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\T450\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
+    "C:\\Users\\T450\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
