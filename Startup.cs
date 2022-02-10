@@ -30,6 +30,8 @@ namespace UniversityAPI
             services.AddDbContext<UniversityDBContext>(opt => 
                             opt.UseNpgsql(Configuration.GetConnectionString("ConnectionCS")));
 
+
+            services.AddScoped<UniversitySeeder>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -37,8 +39,9 @@ namespace UniversityAPI
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UniversitySeeder _seeder)
         {
+            _seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
