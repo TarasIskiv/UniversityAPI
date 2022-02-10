@@ -15,5 +15,7 @@ namespace UniversityAPI.Entities
         public DbSet<Direction> Directions {get; set;}
 
         public DbSet<MarkTable> MarkTables {get; set;}
+
+        public DbSet<Admin> Admins {get; set;}
     }
 }
