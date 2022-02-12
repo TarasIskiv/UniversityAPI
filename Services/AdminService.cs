@@ -1,8 +1,10 @@
+using UniversityAPI.DTOS;
+
 namespace UniversityAPI.Services
 {
     public class AdminService : IAdminService
     {
-        public void addNewGroup()
+        public void addNewGroup(CreateGroupDTO groupDTO)
         {
             throw new System.NotImplementedException();
         }
@@ -11,12 +13,12 @@ namespace UniversityAPI.Services
             throw new System.NotImplementedException();
         }
         
-        public void ModifyGroup()
+        public void ModifyGroup(ModifyGroupDTO dto)
         {
             throw new System.NotImplementedException();
         }
 
-        public void addNewDirection()
+        public void addNewDirection(CreateDirectionDTO directionDTO)
         {
             throw new System.NotImplementedException();
         }
@@ -25,7 +27,7 @@ namespace UniversityAPI.Services
         {
             throw new System.NotImplementedException();
         }
-        public void ModifyDirection()
+        public void ModifyDirection(ModifyDirectionDTO directionDTO)
         {
             throw new System.NotImplementedException();
         }

@@ -1,18 +1,20 @@
+using UniversityAPI.DTOS;
+
 namespace UniversityAPI.Services
 {
     public interface IAdminService
     {
-        public void addNewGroup();
+        public void addNewGroup(CreateGroupDTO groupDTO);
 
         public void RemoveGroup(int id);
 
-        public void ModifyGroup();
+        public void ModifyGroup(ModifyGroupDTO groupDTO);
 
-         public void addNewDirection();
+         public void addNewDirection(CreateDirectionDTO directionDTO);
 
         public void RemoveDiretion(int id);
 
-        public void ModifyDirection();
+        public void ModifyDirection(ModifyDirectionDTO directionDTO);
 
         public void RemoveStudent(int id);
 

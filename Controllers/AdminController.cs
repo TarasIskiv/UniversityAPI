@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using UniversityAPI.DTOS;
 
 namespace UniversityAPI.Controllers
 {
@@ -16,7 +17,7 @@ namespace UniversityAPI.Controllers
         #region Group
 
         [HttpPost("add/group")]
-        public ActionResult CreateNewGroup()
+        public ActionResult CreateNewGroup([FromBody] CreateGroupDTO groupDTO)
         {
             return Ok();
         }
@@ -28,7 +29,7 @@ namespace UniversityAPI.Controllers
         }
 
         [HttpPut("modify/group")]
-        public ActionResult ModifyGroupName([FromBody] string name)
+        public ActionResult ModifyGroupName([FromBody] ModifyGroupDTO groupDTO)
         {
             return Ok();
         }
@@ -36,7 +37,7 @@ namespace UniversityAPI.Controllers
 
         #region Direction
         [HttpPost("add/direction")]
-        public ActionResult CreateNewDirection()
+        public ActionResult CreateNewDirection([FromBody] CreateDirectionDTO directionDTO)
         {
             return Ok();
         }
@@ -48,7 +49,7 @@ namespace UniversityAPI.Controllers
         }
 
         [HttpPut("modify/direction")]
-        public ActionResult ModifyDirectionName([FromBody] string name)
+        public ActionResult ModifyDirectionName([FromBody] ModifyDirectionDTO directionDTO)
         {
             return Ok();
         }
