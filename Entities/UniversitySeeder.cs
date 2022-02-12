@@ -22,6 +22,18 @@ namespace UniversityAPI.Entities
                     _context.Admins.AddRange(GetAdmins());
                     _context.SaveChanges();
                 }
+
+                if(!_context.Directions.Any())
+                {
+                    _context.Directions.AddRange(GetDirections());
+                    _context.SaveChanges();
+                }
+
+                 if(!_context.Groups.Any())
+                {
+                    _context.Groups.AddRange(GetGroups());
+                    _context.SaveChanges();
+                }
             }
         }
 
@@ -37,6 +49,49 @@ namespace UniversityAPI.Entities
             };
 
             return admins;
+        }
+
+        private IEnumerable<Group> GetGroups()
+        {
+            var groups = new List<Group>()
+            {
+                new Group()
+                {
+                    Name = "Default Group For New Students",
+                    CountStudentsInGroup = 0
+                }
+            };
+
+            return groups;
+        }
+
+        private IEnumerable<Direction> GetDirections()
+        {
+            var directions = new List<Direction>()
+            {
+                new Direction()
+                {
+                    DirectionName = "Economic"
+                },
+                new Direction()
+                {
+                    DirectionName = "Mathemathic"
+                },
+                new Direction()
+                {
+                    DirectionName = "Chemical"
+                },
+                new Direction()
+                {
+                    DirectionName = "Biological"
+                },
+                new Direction()
+                {
+                    DirectionName = "Physical"
+                }
+            };
+
+            return directions;
         }
     }
 }
