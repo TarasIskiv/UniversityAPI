@@ -5,6 +5,6 @@ namespace UniversityAPI.DTOS
     public class CreateDirectionDTO
     {
         [Required]
-        public string Name { get; set; }
+        public string DirectionName { get; set; }
     }
 }

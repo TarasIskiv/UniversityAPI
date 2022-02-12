@@ -18,5 +18,7 @@ namespace UniversityAPI.DTOS
         [Required]
         public int CourseYear { get; set; }
         public int DirectionId {get; set;}
+        public int GroupId {get; set;}
+
     }
 }
