@@ -36,7 +36,7 @@ namespace UniversityAPI
             services.AddScoped<UniversitySeeder>();
 
             services.AddScoped<IHomeService, HomeService>();
-
+            services.AddScoped<IAdminService, AdminService>();
             services.AddSingleton(AutoMapperConfiguration.Initialize());
 
             services.AddControllers();
