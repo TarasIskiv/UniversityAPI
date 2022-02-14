@@ -32,6 +32,7 @@ namespace UniversityAPI.Services
             return studentsDto;
         }
 
+
         public GroupDTO GetGroupById(int id)
         {
             var group  = _context.Groups.SingleOrDefault(x => x.Id == id);
@@ -51,7 +52,7 @@ namespace UniversityAPI.Services
         public IEnumerable<StudentDTO> GetStudentsByName(string name)
         {
             var students = _context.Students
-                            .Where(x => (x.FirstName + x.LastName).ToString().Contains(name))
+                            .Where(x => x.FirstName.StartsWith(name))
                             .ToList();
             
             if(students == null) throw new Exception(); // students not found
