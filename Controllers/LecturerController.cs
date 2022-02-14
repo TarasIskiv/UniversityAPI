@@ -36,7 +36,7 @@ namespace UniversityAPI.Controllers
         #endregion
 
         #region Mark Table
-        [HttpPost]
+        [HttpPost("add/mark")]
         public ActionResult PostNewMarkForStudent(CreateMarkDTO markDTO)
         {
             _service.AddNewMark(markDTO);
