@@ -1,4 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using UniversityAPI.DTOS;
+using UniversityAPI.Entities;
+using UniversityAPI.Services;
 
 namespace UniversityAPI.Controllers
 {
@@ -6,61 +11,62 @@ namespace UniversityAPI.Controllers
     [Route("api/lecturer")]
     public class LecturerController : ControllerBase
     {
-        /*
-            lecturer:
-                -modify data about himself
-                -get data about himself
-            marktable:
-                - add new Mark for selected student
-            students:
-                -get all
-                -get by name
-            groups:
-                -get group by Id
-        */
+        private readonly ILecturerService _service;
 
+        public LecturerController(ILecturerService service)
+        {
+            _service = service;
+        }
         #region Lecturer
         [HttpPut("modify")]
-        public ActionResult ModifyLecturer()
+        public ActionResult ModifyLecturer(ModifyLecturerDTO lecturerDTO)
         {
+            //get id from Token
+            _service.ModifyLecturer(lecturerDTO, 1);
             return Ok();
         }
 
         [HttpGet("info")]
-        public ActionResult GetLecturerInfo()
+        public ActionResult<LecturerDTO> GetLecturerInfo()
         {
-            return Ok();
+            //get id from token
+            var lecturer = _service.GetLecturer(1);
+            return Ok(lecturer);
         }
         #endregion
 
         #region Mark Table
         [HttpPost]
-        public ActionResult PostNewMarkForStudent()
+        public ActionResult PostNewMarkForStudent(CreateMarkDTO markDTO)
         {
+            _service.AddNewMark(markDTO);
             return Ok();
         }
         #endregion
 
         #region Students
         [HttpGet("students/all")]
-        public ActionResult GetAllStudents()
+        public ActionResult<IEnumerable<StudentDTO>> GetAllStudents()
         {
-            return Ok();
+            var students = _service.GetAllStudents();
+            return Ok(students);
         }
 
 
         [HttpGet("students/{name}")]
-        public ActionResult GetStudentByName([FromRoute] string name)
+        public ActionResult<IEnumerable<StudentDTO>> GetStudentByName([FromRoute] string name)
         {
-            return Ok();
+            var students = _service.GetStudentsByName(name);
+            return Ok(students);
         }
         #endregion
 
         #region Group
         [HttpGet("group/{id}")]
-        public ActionResult GetGroupById([FromRoute] int id)
+        public ActionResult<GroupDTO> GetGroupById([FromRoute] int id)
         {
-            return Ok();
+            var selectedGroup = _service.GetGroupById(id);
+            return Ok(selectedGroup);
         }
         #endregion
     }

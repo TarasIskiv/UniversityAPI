@@ -15,6 +15,10 @@ namespace UniversityAPI.AutoMapperData
                     cfg.CreateMap<CreateLecturerDTO, Lecturer>();
                     cfg.CreateMap<CreateGroupDTO, Group>();
                     cfg.CreateMap<CreateDirectionDTO, Direction>();
+                    cfg.CreateMap<Student, StudentDTO>();
+                    cfg.CreateMap<Group, GroupDTO>();
+                    cfg.CreateMap<Lecturer, LecturerDTO>();
+                    cfg.CreateMap<CreateMarkDTO, MarkTable>();
                 }
             ).CreateMapper();
         }

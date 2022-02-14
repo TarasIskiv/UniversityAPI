@@ -5,16 +5,16 @@ namespace UniversityAPI.Services
 {
     public interface ILecturerService
     {
-        public void ModifyLecturer(ModifyLecturerDTO lecturerDTO);
+        public void ModifyLecturer(ModifyLecturerDTO lecturerDTO, int id);
 
         public LecturerDTO GetLecturer(int id);
 
-        public void AddNewMark();
+        public void AddNewMark(CreateMarkDTO markDTO);
 
         public IEnumerable<StudentDTO> GetAllStudents();
 
-        public StudentDTO GetStudentByName(string name);
+        public IEnumerable<StudentDTO> GetStudentsByName(string name);
 
-        public void GetGroupById(int id);
+        public GroupDTO GetGroupById(int id);
     }
 }
