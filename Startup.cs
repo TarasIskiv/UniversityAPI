@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using UniversityAPI.AutoMapperData;
 using UniversityAPI.Entities;
+using UniversityAPI.Middlewares;
 using UniversityAPI.Services;
 
 namespace UniversityAPI
@@ -38,9 +39,10 @@ namespace UniversityAPI
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<ILecturerService, LecturerService>();
-            
+
             services.AddSingleton(AutoMapperConfiguration.Initialize());
 
+            services.AddScoped<ErrorHandlerMiddleware>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -58,12 +60,14 @@ namespace UniversityAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UniversityAPI v1"));
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
