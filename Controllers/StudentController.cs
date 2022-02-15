@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using UniversityAPI.DTOS;
 using UniversityAPI.Entities;
+using UniversityAPI.Services;
 
 namespace UniversityAPI.Controllers
 {
@@ -10,46 +11,43 @@ namespace UniversityAPI.Controllers
     [Route("api/student")]
     public class StudentController : ControllerBase
     {
-        /*
-            student:
-                -get info about current student
-                -modify data
-            markTable:
-                get marks of current Student
-            group:
-                -get current group info
-            lecturer:
-                -get all lecturers
-                -get lecturer by name
-        */
+        private readonly IStudentService _service;
 
+        public StudentController(IStudentService service)
+        {
+            _service = service;
+        }
         #region Student
         [HttpGet("info")]
         public ActionResult<StudentDTO> GetStudentInfo()
         {
-            return Ok();
+            var student = _service.GetStudentInfo(3);
+            return Ok(student);
         }
 
         [HttpPut("modify")]
-        public ActionResult ModifyStudent()
+        public ActionResult ModifyStudent(ModifyStudentDTO studentDTO)
         {
+            _service.ModifyStudent(studentDTO, 3);
             return Ok();
         }
         #endregion
 
         #region MarkTable
-        [HttpGet]
-        public ActionResult<IEnumerable<MarkTable>> GetAllMarks()
+        [HttpGet("marks")]
+        public ActionResult<IEnumerable<MarkTable>> GetAllMarks() // not correct work
         {
-            return Ok();
+            var marks = _service.GetStudentMarks(3);
+            return Ok(marks);
         }
         #endregion
 
         #region Group
         [HttpGet("group")]
-        public ActionResult<GroupDTO> GetStudentsGroup()
+        public ActionResult<GroupDTO> GetStudentsGroup() // not work
         {
-            return Ok();
+            var group = _service.GetStudentGroup(3);
+            return Ok(group);
         }
         #endregion
 
@@ -57,13 +55,15 @@ namespace UniversityAPI.Controllers
         [HttpGet("lecturers/all")]
         public ActionResult<IEnumerable<LecturerDTO>> GetAllLecturers()
         {
-            return Ok();
+            var lecturers =_service.GetAllLecturers();
+            return Ok(lecturers);
         }
 
-        [HttpGet("lecturer/{name}")]
+        [HttpGet("lecturers/{name}")]
         public ActionResult<IEnumerable<LecturerDTO>> GetLecturersByName([FromRoute] string name)
         {
-            return Ok();
+            var lecturers = _service.GetLecturersByName(name);
+            return Ok(lecturers);
         }
         #endregion
     }
