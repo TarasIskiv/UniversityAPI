@@ -46,8 +46,8 @@ namespace UniversityAPI.Controllers
         [HttpGet("group")]
         public ActionResult<GroupDTO> GetStudentsGroup() // not work
         {
-            var group = _service.GetStudentGroup(3);
-            return Ok(group);
+            var studentGroup = _service.GetStudentGroup(3);
+            return Ok(studentGroup);
         }
         #endregion
 

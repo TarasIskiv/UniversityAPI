@@ -12,10 +12,10 @@ namespace UniversityAPI.Middlewares
             {
                 await next.Invoke(context);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 context.Response.StatusCode = 404;
-                await context.Response.WriteAsync("Something go wrong");
+                await context.Response.WriteAsync("Something go wrong\n" + ex.Message);
             }
         }
     }

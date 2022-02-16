@@ -41,13 +41,19 @@ namespace UniversityAPI.Services
         {
             var student = _context.Students.SingleOrDefault(x => x.Id == studentId);
             if(student == null) throw new Exception(); // student not found
-
-            var group = _context.Groups.SingleOrDefault(x => x.Id == student.GroupId);
+            int id = student.GroupId;
+            var group = _context.Groups.SingleOrDefault(x => x.Id == id);
             if(group == null) throw new Exception(); // group not found
+
 
             return _mapper.Map<GroupDTO>(group);
         }
 
+            /*
+            var group  = _context.Groups.SingleOrDefault(x => x.Id == id);
+            if(group == null) throw new Exception(); // group not found
+
+            return _mapper.Map<GroupDTO>(group);*/
         public StudentDTO GetStudentInfo(int id)
         {
             var student = _context.Students.SingleOrDefault(x => x.Id == id);
@@ -57,8 +63,8 @@ namespace UniversityAPI.Services
 
         public IEnumerable<MarkDTO> GetStudentMarks(int studentId)
         {
-            var marks = _context.MarkTables.Where(x => x.Id == studentId);
-            if(marks == null) throw new Exception(); // marks not found
+            var marks = _context.MarkTables.Where(x => x.StudentId == studentId).ToList();
+            if(marks == null || marks.Count() == 0) throw new Exception(); // marks not found
             
             return _mapper.Map<IEnumerable<MarkDTO>>(marks);
         }
