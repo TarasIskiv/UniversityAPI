@@ -66,8 +66,10 @@ namespace UniversityAPI.Services
         }
         public int GetLoginedUserId(string token)
         {
-            //var val = tokenHandler.ReadJwtToken(loginedUserToken).Claims.ToList();
-            throw new NotImplementedException();
+            ValidateToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var claims = tokenHandler.ReadJwtToken(token).Claims.ToList();
+            return Int32.Parse(claims[1].Value);
         }
     }
 }
