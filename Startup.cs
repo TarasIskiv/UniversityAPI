@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,9 +14,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UniversityAPI.AutoMapperData;
 using UniversityAPI.Entities;
+using UniversityAPI.JWT;
 using UniversityAPI.Middlewares;
 using UniversityAPI.Services;
 
@@ -34,7 +38,33 @@ namespace UniversityAPI
             services.AddDbContext<UniversityDBContext>(opt => 
                             opt.UseNpgsql(Configuration.GetConnectionString("ConnectionCS")));
 
+             var jwtSection = Configuration.GetSection("JWTSettings");
+            services.Configure<JWTSettings>(jwtSection);
 
+
+            //to validate the token which has been sent by clients
+            var appSettings = jwtSection.Get<JWTSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+            
             services.AddScoped<UniversitySeeder>();
 
             services.AddScoped<IHomeService, HomeService>();
