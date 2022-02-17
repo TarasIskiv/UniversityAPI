@@ -20,6 +20,7 @@ namespace UniversityAPI.AutoMapperData
                     cfg.CreateMap<Lecturer, LecturerDTO>();
                     cfg.CreateMap<CreateMarkDTO, MarkTable>();
                     cfg.CreateMap<MarkTable, MarkDTO>();
+                    cfg.CreateMap<Student, StudentInGroupDTO>();
                 }
             ).CreateMapper();
         }

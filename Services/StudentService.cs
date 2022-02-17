@@ -47,7 +47,7 @@ namespace UniversityAPI.Services
                 
 
             var groupDTO = _mapper.Map<GroupDTO>(group);
-            groupDTO.StudentsInGroup = _mapper.Map<IEnumerable<StudentDTO>>(_context.Students.Where(x => x.GroupId == id).ToList()).ToList();
+            groupDTO.StudentsInGroup = _mapper.Map<IEnumerable<StudentInGroupDTO>>(_context.Students.Where(x => x.GroupId == id).ToList()).ToList();
 
             return groupDTO;
         }

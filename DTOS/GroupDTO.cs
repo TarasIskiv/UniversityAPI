@@ -8,7 +8,7 @@ namespace UniversityAPI.DTOS
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public List<StudentDTO> StudentsInGroup {get; set;}
+        public List<StudentInGroupDTO> StudentsInGroup {get; set;}
         public int CountStudentsInGroup { get; set; }
     }
 }
