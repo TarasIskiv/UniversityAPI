@@ -42,13 +42,31 @@ namespace UniversityAPI.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var loginedUserToken = tokenHandler.WriteToken(token);
 
-            var val = tokenHandler.ReadJwtToken(loginedUserToken).Claims.ToList();
-
             return loginedUserToken;
         }
 
         public void ValidateToken(string token)
         {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            if(tokenHandler.CanReadToken(token))
+            {
+                try
+                {
+                    var result = tokenHandler.ReadJwtToken(token);
+                }
+                catch(ArgumentException)
+                {
+                    throw new Exception(); // not validate
+                }
+            }
+            else
+            {
+                throw new Exception(); // not validate
+            }
+        }
+        public int GetLoginedUserId(string token)
+        {
+            //var val = tokenHandler.ReadJwtToken(loginedUserToken).Claims.ToList();
             throw new NotImplementedException();
         }
     }

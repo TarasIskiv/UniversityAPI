@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniversityAPI.DTOS;
 using UniversityAPI.Services;
@@ -9,30 +10,35 @@ namespace UniversityAPI.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _service;
+        private readonly ITokenService _tokenService;
 
-        public AdminController(IAdminService service)
+        public AdminController(IAdminService service, ITokenService tokenService)
         {
             _service = service;
+            _tokenService = tokenService;
         }
 
         #region Group
         [HttpPost("add/group")]
-        public ActionResult CreateNewGroup([FromBody] CreateGroupDTO groupDTO)
+        public ActionResult CreateNewGroup([FromHeader] string token,[FromBody] CreateGroupDTO groupDTO)
         {
+            _tokenService.ValidateToken(token);
             _service.addNewGroup(groupDTO);
             return Ok();
         }
 
         [HttpDelete("remove/group/{groupId}")]
-        public ActionResult RemoveGroup([FromRoute]int groupId)
+        public ActionResult RemoveGroup([FromHeader] string token,[FromRoute]int groupId)
         {
+            _tokenService.ValidateToken(token);
             _service.RemoveGroup(groupId);
             return Ok();
         }
 
         [HttpPut("modify/group")]
-        public ActionResult ModifyGroupName([FromBody] ModifyGroupDTO groupDTO)
+        public ActionResult ModifyGroupName([FromHeader] string token,[FromBody] ModifyGroupDTO groupDTO)
         {
+            _tokenService.ValidateToken(token);
             _service.ModifyGroup(groupDTO);
             return Ok();
         }
@@ -40,22 +46,25 @@ namespace UniversityAPI.Controllers
 
         #region Direction
         [HttpPost("add/direction")]
-        public ActionResult CreateNewDirection([FromBody] CreateDirectionDTO directionDTO)
+        public ActionResult CreateNewDirection([FromHeader] string token,[FromBody] CreateDirectionDTO directionDTO)
         {
+            _tokenService.ValidateToken(token);
             _service.addNewDirection(directionDTO);
             return Ok();
         }
 
         [HttpDelete("remove/direction/{directionId}")]
-        public ActionResult RemoveDirection([FromRoute]int directionId)
+        public ActionResult RemoveDirection([FromHeader] string token,[FromRoute]int directionId)
         {
+            _tokenService.ValidateToken(token);
             _service.RemoveDiretion(directionId);
             return Ok();
         }
 
         [HttpPut("modify/direction")]
-        public ActionResult ModifyDirectionName([FromBody] ModifyDirectionDTO directionDTO)
+        public ActionResult ModifyDirectionName([FromHeader] string token,[FromBody] ModifyDirectionDTO directionDTO)
         {
+            _tokenService.ValidateToken(token);
             _service.ModifyDirection(directionDTO);
             return Ok();
         }
@@ -63,8 +72,9 @@ namespace UniversityAPI.Controllers
 
         #region Student
         [HttpDelete("remove/student/{studentId}")]
-        public ActionResult RemoveStudent([FromRoute] int studentId)
+        public ActionResult RemoveStudent([FromHeader] string token,[FromRoute] int studentId)
         {
+            _tokenService.ValidateToken(token);
             _service.RemoveStudent(studentId);
             return Ok();
         }
@@ -72,8 +82,9 @@ namespace UniversityAPI.Controllers
 
         #region Lecturer
         [HttpDelete("remove/lecturer/{lecturerId}")]
-        public ActionResult RemoveLecturer([FromRoute] int lecturerId)
+        public ActionResult RemoveLecturer([FromHeader] string token,[FromRoute] int lecturerId)
         {
+            _tokenService.ValidateToken(token);
             _service.RemoveLecturer(lecturerId);
             return Ok();
         }

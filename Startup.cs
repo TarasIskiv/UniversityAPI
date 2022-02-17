@@ -75,7 +75,9 @@ namespace UniversityAPI
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddSingleton(AutoMapperConfiguration.Initialize());
-
+            services.AddAuthorization(options =>
+                                options.AddPolicy("status",
+                                    policy => policy.RequireClaim("admin", "CanViewPage", "CanViewAnything")));
             services.AddScoped<ErrorHandlerMiddleware>();
             services.AddControllers().AddJsonOptions(x =>
                     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
@@ -101,6 +103,7 @@ namespace UniversityAPI
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseEndpoints(endpoints =>
