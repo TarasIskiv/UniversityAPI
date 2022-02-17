@@ -36,3 +36,10 @@ C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB
 C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\obj\Debug\net5.0\UniversityAPI.genruntimeconfig.cache
 C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\T450\Desktop\C#_projects\.Net_Projects_VSCode\VSCODE_PROJECTS_ON_GITHUB\University\UniversityAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

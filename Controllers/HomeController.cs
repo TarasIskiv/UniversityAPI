@@ -1,5 +1,14 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using UniversityAPI.DTOS;
+using UniversityAPI.Indentity;
+using UniversityAPI.JWT;
 using UniversityAPI.Services;
 
 namespace UniversityAPI.Controllers
@@ -9,17 +18,23 @@ namespace UniversityAPI.Controllers
     public class HomeController : ControllerBase
     {
         private readonly IHomeService _service;
+        private readonly ITokenService _tokenService;
 
-        public HomeController(IHomeService service)
+        public HomeController(IHomeService service, ITokenService tokenService)
         {
             _service = service;
+            _tokenService = tokenService;
         }
 
         [HttpGet("login")]
         public ActionResult Login(LoginUserDTO userDTO)
         {
+            
             var result = _service.login(userDTO);
-            return Ok(result.Item2);
+            var userToken = _tokenService.GetUserToken(result);
+           // var val = tokenHandler.ReadJwtToken(loginedUserToken).Claims.ToList();
+
+            return Ok(userToken);
         }
 
         [HttpPost("register/student")]

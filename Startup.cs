@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UniversityAPI.AutoMapperData;
 using UniversityAPI.Entities;
+using UniversityAPI.Indentity;
 using UniversityAPI.JWT;
 using UniversityAPI.Middlewares;
 using UniversityAPI.Services;
@@ -66,11 +67,13 @@ namespace UniversityAPI
             });
             
             services.AddScoped<UniversitySeeder>();
+            services.AddScoped<IndentityLoginedUser>();
 
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<ILecturerService, LecturerService>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddSingleton(AutoMapperConfiguration.Initialize());
 
             services.AddScoped<ErrorHandlerMiddleware>();
