@@ -44,16 +44,15 @@ namespace UniversityAPI.Services
             int id = student.GroupId;
             var group = _context.Groups.SingleOrDefault(x => x.Id == id);
             if(group == null) throw new Exception(); // group not found
+                
 
+            var groupDTO = _mapper.Map<GroupDTO>(group);
+            groupDTO.StudentsInGroup = _mapper.Map<IEnumerable<StudentDTO>>(_context.Students.Where(x => x.GroupId == id).ToList()).ToList();
 
-            return _mapper.Map<GroupDTO>(group);
+            return groupDTO;
         }
 
-            /*
-            var group  = _context.Groups.SingleOrDefault(x => x.Id == id);
-            if(group == null) throw new Exception(); // group not found
 
-            return _mapper.Map<GroupDTO>(group);*/
         public StudentDTO GetStudentInfo(int id)
         {
             var student = _context.Students.SingleOrDefault(x => x.Id == id);

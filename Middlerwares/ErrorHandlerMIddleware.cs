@@ -8,6 +8,7 @@ namespace UniversityAPI.Middlewares
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
+            //"enableStepFiltering": false
             try
             {
                 await next.Invoke(context);
