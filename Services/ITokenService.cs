@@ -6,8 +6,8 @@ namespace UniversityAPI.Services
     {
         public string GetUserToken(Tuple<int, string> result);
 
-        public void ValidateToken(string token);
+        public void ValidateToken(string token, string expectedRole);
 
-        public int GetLoginedUserId(string token);
+        public int GetLoginedUserId(string token, string expectedRole);
     }
 }

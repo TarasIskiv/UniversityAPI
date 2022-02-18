@@ -45,7 +45,7 @@ namespace UniversityAPI.Services
             return loginedUserToken;
         }
 
-        public void ValidateToken(string token)
+        public void ValidateToken(string token, string expectedRole)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             if(tokenHandler.CanReadToken(token))
@@ -53,6 +53,7 @@ namespace UniversityAPI.Services
                 try
                 {
                     var result = tokenHandler.ReadJwtToken(token);
+                    if(!result.Claims.ToList()[1].ToString().Equals(expectedRole)) throw new Exception (); // not rights
                 }
                 catch(ArgumentException)
                 {
@@ -64,9 +65,9 @@ namespace UniversityAPI.Services
                 throw new Exception(); // not validate
             }
         }
-        public int GetLoginedUserId(string token)
+        public int GetLoginedUserId(string token, string expectedRole)
         {
-            ValidateToken(token);
+            ValidateToken(token,expectedRole);
             var tokenHandler = new JwtSecurityTokenHandler();
             var claims = tokenHandler.ReadJwtToken(token).Claims.ToList();
             return Int32.Parse(claims[2].Value);

@@ -11,6 +11,7 @@ namespace UniversityAPI.Controllers
     [Route("api/student")]
     public class StudentController : ControllerBase
     {
+        private const string _role = "student";
         private readonly IStudentService _service;
         private readonly ITokenService _tokenService;
 
@@ -23,7 +24,7 @@ namespace UniversityAPI.Controllers
         [HttpGet("info")]
         public ActionResult<StudentDTO> GetStudentInfo([FromHeader] string token)
         {
-            var studentId = _tokenService.GetLoginedUserId(token);
+            var studentId = _tokenService.GetLoginedUserId(token,_role);
             var student = _service.GetStudentInfo(studentId);
             return Ok(student);
         }
@@ -31,7 +32,7 @@ namespace UniversityAPI.Controllers
         [HttpPut("modify")]
         public ActionResult ModifyStudent([FromHeader] string token, [FromBody] ModifyStudentDTO studentDTO)
         {
-            var studentId = _tokenService.GetLoginedUserId(token);
+            var studentId = _tokenService.GetLoginedUserId(token,_role);
             _service.ModifyStudent(studentDTO, studentId);
             return Ok();
         }
@@ -41,7 +42,7 @@ namespace UniversityAPI.Controllers
         [HttpGet("marks")]
         public ActionResult<IEnumerable<MarkTable>> GetAllMarks([FromHeader] string token)
         {
-            var studentId = _tokenService.GetLoginedUserId(token);            
+            var studentId = _tokenService.GetLoginedUserId(token,_role);            
             var marks = _service.GetStudentMarks(studentId);
             return Ok(marks);
         }
@@ -51,7 +52,7 @@ namespace UniversityAPI.Controllers
         [HttpGet("group")]
         public ActionResult<GroupDTO> GetStudentsGroup([FromHeader] string token) 
         {
-            var studentId = _tokenService.GetLoginedUserId(token);                        
+            var studentId = _tokenService.GetLoginedUserId(token,_role);                        
             var studentGroup = _service.GetStudentGroup(studentId);
             return Ok(studentGroup);
         }
@@ -61,7 +62,7 @@ namespace UniversityAPI.Controllers
         [HttpGet("lecturers/all")]
         public ActionResult<IEnumerable<LecturerDTO>> GetAllLecturers([FromHeader] string token)
         {
-            _tokenService.ValidateToken(token);
+            _tokenService.ValidateToken(token,_role);
             var lecturers =_service.GetAllLecturers();
             return Ok(lecturers);
         }
@@ -69,7 +70,7 @@ namespace UniversityAPI.Controllers
         [HttpGet("lecturers/{name}")]
         public ActionResult<IEnumerable<LecturerDTO>> GetLecturersByName([FromHeader] string token,[FromRoute] string name)
         {
-            _tokenService.ValidateToken(token);
+            _tokenService.ValidateToken(token,_role);
             var lecturers = _service.GetLecturersByName(name);
             return Ok(lecturers);
         }
