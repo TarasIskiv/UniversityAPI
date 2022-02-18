@@ -12,56 +12,64 @@ namespace UniversityAPI.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _service;
+        private readonly ITokenService _tokenService;
 
-        public StudentController(IStudentService service)
+        public StudentController(IStudentService service, ITokenService tokenService)
         {
             _service = service;
+            _tokenService = tokenService;
         }
         #region Student
         [HttpGet("info")]
-        public ActionResult<StudentDTO> GetStudentInfo()
+        public ActionResult<StudentDTO> GetStudentInfo([FromHeader] string token)
         {
-            var student = _service.GetStudentInfo(3);
+            var studentId = _tokenService.GetLoginedUserId(token);
+            var student = _service.GetStudentInfo(studentId);
             return Ok(student);
         }
 
         [HttpPut("modify")]
-        public ActionResult ModifyStudent(ModifyStudentDTO studentDTO)
+        public ActionResult ModifyStudent([FromHeader] string token, [FromBody] ModifyStudentDTO studentDTO)
         {
-            _service.ModifyStudent(studentDTO, 3);
+            var studentId = _tokenService.GetLoginedUserId(token);
+            _service.ModifyStudent(studentDTO, studentId);
             return Ok();
         }
         #endregion
 
         #region MarkTable
         [HttpGet("marks")]
-        public ActionResult<IEnumerable<MarkTable>> GetAllMarks() // not correct work
+        public ActionResult<IEnumerable<MarkTable>> GetAllMarks([FromHeader] string token)
         {
-            var marks = _service.GetStudentMarks(3);
+            var studentId = _tokenService.GetLoginedUserId(token);            
+            var marks = _service.GetStudentMarks(studentId);
             return Ok(marks);
         }
         #endregion
 
         #region Group
         [HttpGet("group")]
-        public ActionResult<GroupDTO> GetStudentsGroup() // not work
+        public ActionResult<GroupDTO> GetStudentsGroup([FromHeader] string token) 
         {
-            var studentGroup = _service.GetStudentGroup(3);
+            var studentId = _tokenService.GetLoginedUserId(token);                        
+            var studentGroup = _service.GetStudentGroup(studentId);
             return Ok(studentGroup);
         }
         #endregion
 
         #region Lecturer
         [HttpGet("lecturers/all")]
-        public ActionResult<IEnumerable<LecturerDTO>> GetAllLecturers()
+        public ActionResult<IEnumerable<LecturerDTO>> GetAllLecturers([FromHeader] string token)
         {
+            _tokenService.ValidateToken(token);
             var lecturers =_service.GetAllLecturers();
             return Ok(lecturers);
         }
 
         [HttpGet("lecturers/{name}")]
-        public ActionResult<IEnumerable<LecturerDTO>> GetLecturersByName([FromRoute] string name)
+        public ActionResult<IEnumerable<LecturerDTO>> GetLecturersByName([FromHeader] string token,[FromRoute] string name)
         {
+            _tokenService.ValidateToken(token);
             var lecturers = _service.GetLecturersByName(name);
             return Ok(lecturers);
         }

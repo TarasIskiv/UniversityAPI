@@ -69,7 +69,7 @@ namespace UniversityAPI.Services
             ValidateToken(token);
             var tokenHandler = new JwtSecurityTokenHandler();
             var claims = tokenHandler.ReadJwtToken(token).Claims.ToList();
-            return Int32.Parse(claims[1].Value);
+            return Int32.Parse(claims[2].Value);
         }
     }
 }
