@@ -11,11 +11,17 @@ namespace UniversityAPI.Services
     {
         private readonly UniversityDBContext _context;
         private readonly IMapper _mapper;
+        private readonly List<Direction> _directions;
+        private readonly List<Group> _groups;
+        private readonly List<MarkTable> _marks;
 
         public StudentService(UniversityDBContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            _directions = _context.Directions.ToList();
+            _groups = _context.Groups.ToList();
+            _marks = _context.MarkTables.ToList();
         }
         public IEnumerable<LecturerDTO> GetAllLecturers()
         {
@@ -49,6 +55,7 @@ namespace UniversityAPI.Services
             var groupDTO = _mapper.Map<GroupDTO>(group);
             groupDTO.StudentsInGroup = _mapper.Map<IEnumerable<StudentInGroupDTO>>(_context.Students.Where(x => x.GroupId == id).ToList()).ToList();
 
+            groupDTO.CountStudentsInGroup = groupDTO.StudentsInGroup.Count(); 
             return groupDTO;
         }
 
@@ -56,8 +63,17 @@ namespace UniversityAPI.Services
         public StudentDTO GetStudentInfo(int id)
         {
             var student = _context.Students.SingleOrDefault(x => x.Id == id);
+            var studentDTO = _mapper.Map<StudentDTO>(student);
+            studentDTO.DirectionName = _directions.First(x => x.Id == student.DirectionId).DirectionName;
+            studentDTO.GroupName = _groups.First(x => x.Id == student.GroupId).Name;
+            var selectedMarks = _marks.Where(x => x.StudentId == student.Id).ToList();
+            studentDTO.Marks = _mapper.Map<List<SimpleMarkDTO>>(selectedMarks);
+            double averageMark = 0;
 
-            return _mapper.Map<StudentDTO>(student);
+            averageMark = studentDTO.Marks.Sum(x => x.Mark) / studentDTO.Marks.Count();
+            studentDTO.AverageMark = averageMark;
+            
+            return studentDTO;
         }
 
         public IEnumerable<MarkDTO> GetStudentMarks(int studentId)
