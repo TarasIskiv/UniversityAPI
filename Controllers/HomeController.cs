@@ -19,11 +19,13 @@ namespace UniversityAPI.Controllers
     {
         private readonly IHomeService _service;
         private readonly ITokenService _tokenService;
+        private readonly IMailSendler _mailSendler;
 
-        public HomeController(IHomeService service, ITokenService tokenService)
+        public HomeController(IHomeService service, ITokenService tokenService, IMailSendler mailSendler)
         {
             _service = service;
             _tokenService = tokenService;
+            _mailSendler = mailSendler;
         }
 
         [HttpGet("login")]
@@ -41,14 +43,16 @@ namespace UniversityAPI.Controllers
         public ActionResult RegisterStudent(CreateStudentDTO studentDTO)
         {
             _service.registerStudent(studentDTO);
-            return Ok("Registration is success. Check your email address");
+            _mailSendler.SendMailForNewUsers(studentDTO.FirstName, studentDTO.LastName, studentDTO.Login);
+            return Ok("Registration is success.We've sent you email.Check your email address");
         }
 
         [HttpPost("register/lecturer")]
         public ActionResult RegisterLecturer(CreateLecturerDTO lecturerDTO)
         {
             _service.registerLecturer(lecturerDTO);
-            return Ok("Registration is success. Check your email address");
+            _mailSendler.SendMailForNewUsers(lecturerDTO.FirstName, lecturerDTO.LastName, lecturerDTO.Login);            
+            return Ok("Registration is success.We've sent you email.Check your email address");
         }
     }
 }

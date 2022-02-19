@@ -74,6 +74,7 @@ namespace UniversityAPI
             services.AddScoped<ILecturerService, LecturerService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IMailSendler, MailSendler>();
             services.AddSingleton(AutoMapperConfiguration.Initialize());
             services.AddAuthorization(options =>
                                 options.AddPolicy("status",
