@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mail;
 using UniversityAPI.DTOS;
+using UniversityAPI.Entities;
 
 namespace UniversityAPI.Services
 {
@@ -8,9 +9,11 @@ namespace UniversityAPI.Services
     {
         private const string _login = "webapi.tarasiskiv@gmail.com";
         private const string _password = "xhjelxitheiksrrl";
-        public MailSendler()
+        private readonly UniversityDBContext _context;
+
+        public MailSendler(UniversityDBContext context)
         {
-            
+            _context = context;
         }
         public void SendMailForNewUsers(string firstName, string lastName, string login)
         {
@@ -36,6 +39,11 @@ namespace UniversityAPI.Services
                     smtp.Send(mail);
                 }
             }
+        }
+
+        public void SendStudentsMarks(int studentId, string subject, double mark)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
