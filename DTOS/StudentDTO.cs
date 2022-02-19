@@ -12,10 +12,10 @@ namespace UniversityAPI.DTOS
         public int Age { get; set; }
         
         public int CourseYear { get; set; }
-        public Direction Direction{get;set;}
+        public string DirectionName {get;set;}
 
-        public List<MarkTable> Marks{get; set;}
-        public Group Group{get; set;}
+        public List<SimpleMarkDTO> Marks{get; set;}
+        public string GroupName {get; set;}
         
         public double AverageMark { get; set; }
     }

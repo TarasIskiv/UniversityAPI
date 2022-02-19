@@ -34,7 +34,7 @@ namespace UniversityAPI.Controllers
             var userToken = _tokenService.GetUserToken(result);
            // var val = tokenHandler.ReadJwtToken(loginedUserToken).Claims.ToList();
 
-            return Ok(userToken);
+            return Ok($"Your token : {userToken}");
         }
 
         [HttpPost("register/student")]

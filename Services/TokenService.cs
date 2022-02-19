@@ -53,7 +53,7 @@ namespace UniversityAPI.Services
                 try
                 {
                     var result = tokenHandler.ReadJwtToken(token);
-                    if(!result.Claims.ToList()[1].ToString().Equals(expectedRole)) throw new Exception (); // not rights
+                    if(!result.Claims.ToList()[1].Value.ToString().Equals(expectedRole)) throw new Exception (); // not rights
                 }
                 catch(ArgumentException)
                 {
