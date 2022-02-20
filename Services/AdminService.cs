@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using UniversityAPI.DTOS;
 using UniversityAPI.Entities;
+using UniversityAPI.Exceptions;
 
 namespace UniversityAPI.Services
 {
@@ -25,7 +26,7 @@ namespace UniversityAPI.Services
         public void RemoveGroup(int id)
         {
             var selectedGroup = _context.Groups.SingleOrDefault(x => x.Id == id);
-            if(selectedGroup == null) throw new Exception(); // group not found
+            if(selectedGroup == null) throw new Exception(ExceptionType.GroupNotFound); // group not found
 
             _context.Groups.Remove(selectedGroup);
             _context.SaveChanges();
@@ -34,7 +35,7 @@ namespace UniversityAPI.Services
         public void ModifyGroup(ModifyGroupDTO dto)
         {
             var selectedGroup = _context.Groups.SingleOrDefault(x => x.Id == dto.Id);
-            if(selectedGroup == null) throw new Exception(); // group not found
+            if(selectedGroup == null) throw new Exception(ExceptionType.GroupNotFound); // group not found
 
             selectedGroup.Name = dto.Name;
             _context.SaveChanges();
@@ -50,7 +51,7 @@ namespace UniversityAPI.Services
         public void RemoveDiretion(int id)
         {
             var selectedDirection = _context.Directions.SingleOrDefault(x => x.Id == id);
-            if(selectedDirection == null) throw new Exception(); // direction not found
+            if(selectedDirection == null) throw new Exception(ExceptionType.DirectionNotFound); // direction not found
 
             _context.Directions.Remove(selectedDirection);
             _context.SaveChanges();
@@ -58,7 +59,7 @@ namespace UniversityAPI.Services
         public void ModifyDirection(ModifyDirectionDTO directionDTO)
         {
             var selectedDirection = _context.Directions.SingleOrDefault(x => x.Id == directionDTO.Id);
-            if(selectedDirection == null) throw new Exception(); // direction not found
+            if(selectedDirection == null) throw new Exception(ExceptionType.DirectionNotFound); // direction not found
 
             selectedDirection.DirectionName = directionDTO.Name;
             _context.SaveChanges();
@@ -66,7 +67,7 @@ namespace UniversityAPI.Services
         public void RemoveStudent(int id)
         {
             var selectedStudent = _context.Students.SingleOrDefault(x => x.Id == id);
-            if(selectedStudent == null) throw new Exception(); // student not found;
+            if(selectedStudent == null) throw new Exception(ExceptionType.StudentNotFound); // student not found;
 
             _context.Students.Remove(selectedStudent);
             _context.SaveChanges();
@@ -74,7 +75,7 @@ namespace UniversityAPI.Services
         public void RemoveLecturer(int id)
         {
             var selectedLecturer = _context.Lecturers.SingleOrDefault(x => x.Id == id);
-            if(selectedLecturer == null) throw new Exception(); // lecturer not found;
+            if(selectedLecturer == null) throw new Exception(ExceptionType.LecturerNotFound); // lecturer not found;
 
             _context.Lecturers.Remove(selectedLecturer);
             _context.SaveChanges();

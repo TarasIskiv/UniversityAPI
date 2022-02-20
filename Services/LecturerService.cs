@@ -6,6 +6,7 @@ using AutoMapper;
 using AutoMapper.Internal;
 using UniversityAPI.DTOS;
 using UniversityAPI.Entities;
+using UniversityAPI.Exceptions;
 
 namespace UniversityAPI.Services
 {
@@ -58,7 +59,7 @@ namespace UniversityAPI.Services
         public GroupDTO GetGroupById(int id)
         {
             var group  = _context.Groups.SingleOrDefault(x => x.Id == id);
-            if(group == null) throw new Exception(); // group not found
+            if(group == null) throw new Exception(ExceptionType.GroupNotFound); // group not found
             var groupDTO = _mapper.Map<GroupDTO>(group);
             groupDTO.StudentsInGroup = _mapper.Map<List<StudentInGroupDTO>>(_context.Students.Where(x => x.GroupId == group.Id)).ToList();
             var students = groupDTO.StudentsInGroup.Count();
@@ -69,7 +70,7 @@ namespace UniversityAPI.Services
         public LecturerDTO GetLecturer(int id)
         {
             var lecturer = _context.Lecturers.SingleOrDefault(x => x.Id == id);
-            if(lecturer == null) throw new Exception(); // lecturer not found
+            if(lecturer == null) throw new Exception(ExceptionType.LecturerNotFound); // lecturer not found
 
             return _mapper.Map<LecturerDTO>(lecturer);
         }
@@ -80,7 +81,7 @@ namespace UniversityAPI.Services
                             .Where(x => x.FirstName.StartsWith(name))
                             .ToList();
             
-            if(students == null) throw new Exception(); // students not found
+            if(students == null) throw new Exception(ExceptionType.StudentNotFound); // students not found
             var studentsDto = _mapper.Map<IEnumerable<StudentDTO>>(students).ToList();
             for(int i = 0; i < students.Count(); ++i)
             {
@@ -102,7 +103,7 @@ namespace UniversityAPI.Services
         public void ModifyLecturer(ModifyLecturerDTO lecturerDTO, int id)
         {
             var lecturer = _context.Lecturers.SingleOrDefault(x => x.Id == id);
-            if(lecturer == null) throw new Exception(); // lecturer not found
+            if(lecturer == null) throw new Exception(ExceptionType.LecturerNotFound); // lecturer not found
 
             lecturer.FirstName = lecturerDTO.FirstName;
             lecturer.LastName = lecturerDTO.LastName;

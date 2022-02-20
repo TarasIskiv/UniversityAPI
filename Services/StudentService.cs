@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using UniversityAPI.DTOS;
 using UniversityAPI.Entities;
+using UniversityAPI.Exceptions;
 
 namespace UniversityAPI.Services
 {
@@ -26,7 +27,7 @@ namespace UniversityAPI.Services
         public IEnumerable<LecturerDTO> GetAllLecturers()
         {
             var lecturers = _context.Lecturers.ToList();
-            if(lecturers == null) throw new Exception(); // lecturers not found
+            if(lecturers == null) throw new Exception(ExceptionType.LecturerNotFound); // lecturers not found
 
             var lecturersDTO = _mapper.Map<IEnumerable<LecturerDTO>>(lecturers);
             return lecturersDTO;
@@ -37,7 +38,7 @@ namespace UniversityAPI.Services
             var lecturers = _context.Lecturers
                             .Where(x => x.FirstName.StartsWith(name))
                             .ToList();
-            if(lecturers == null) throw new Exception(); // lecturers not found
+            if(lecturers == null) throw new Exception(ExceptionType.LecturerNotFound); // lecturers not found
 
             var lecturersDTO = _mapper.Map<IEnumerable<LecturerDTO>>(lecturers);
             return lecturersDTO;
@@ -46,10 +47,10 @@ namespace UniversityAPI.Services
         public GroupDTO GetStudentGroup(int studentId)
         {
             var student = _context.Students.SingleOrDefault(x => x.Id == studentId);
-            if(student == null) throw new Exception(); // student not found
+            if(student == null) throw new Exception(ExceptionType.StudentNotFound); // student not found
             int id = student.GroupId;
             var group = _context.Groups.SingleOrDefault(x => x.Id == id);
-            if(group == null) throw new Exception(); // group not found
+            if(group == null) throw new Exception(ExceptionType.GroupNotFound); // group not found
                 
 
             var groupDTO = _mapper.Map<GroupDTO>(group);
@@ -79,7 +80,7 @@ namespace UniversityAPI.Services
         public IEnumerable<MarkDTO> GetStudentMarks(int studentId)
         {
             var marks = _context.MarkTables.Where(x => x.StudentId == studentId).ToList();
-            if(marks == null || marks.Count() == 0) throw new Exception(); // marks not found
+            if(marks == null || marks.Count() == 0) throw new Exception(ExceptionType.MarksNotFound); // marks not found
             
             return _mapper.Map<IEnumerable<MarkDTO>>(marks);
         }
@@ -87,7 +88,7 @@ namespace UniversityAPI.Services
         public void ModifyStudent(ModifyStudentDTO studentDTO, int id)
         {
             var student = _context.Students.SingleOrDefault(x => x.Id == id);
-            if(student == null) throw new Exception(); //student not found
+            if(student == null) throw new Exception(ExceptionType.StudentNotFound); //student not found
 
             student.Age = studentDTO.Age;
             student.FirstName = studentDTO.FirstName;

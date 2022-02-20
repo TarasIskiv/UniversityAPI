@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using UniversityAPI.Exceptions;
 using UniversityAPI.Indentity;
 using UniversityAPI.JWT;
 
@@ -53,16 +54,16 @@ namespace UniversityAPI.Services
                 try
                 {
                     var result = tokenHandler.ReadJwtToken(token);
-                    if(!result.Claims.ToList()[1].Value.ToString().Equals(expectedRole)) throw new Exception (); // not rights
+                    if(!result.Claims.ToList()[1].Value.ToString().Equals(expectedRole)) throw new Exception (ExceptionType.AccessDenied); // not rights
                 }
                 catch(ArgumentException)
                 {
-                    throw new Exception(); // not validate
+                    throw new Exception(ExceptionType.TokenIsNotValid); // not validate
                 }
             }
             else
             {
-                throw new Exception(); // not validate
+                throw new Exception(ExceptionType.TokenIsNotValid); // not validate
             }
         }
         public int GetLoginedUserId(string token, string expectedRole)
