@@ -14,11 +14,13 @@ namespace UniversityAPI.Controllers
         private const string _role = "lecturer";
         private readonly ILecturerService _service;
         private readonly ITokenService _tokenService;
+        private readonly IMailSendler _mailSendler;
 
-        public LecturerController(ILecturerService service, ITokenService tokenService)
+        public LecturerController(ILecturerService service, ITokenService tokenService, IMailSendler mailSendler)
         {
             _service = service;
             _tokenService = tokenService;
+            _mailSendler = mailSendler;
         }
         #region Lecturer
         [HttpPut("modify")]
@@ -46,6 +48,7 @@ namespace UniversityAPI.Controllers
         {
             _tokenService.ValidateToken(token,_role);
             _service.AddNewMark(markDTO);
+            _mailSendler.SendStudentsMarks(markDTO.StudentId, markDTO.Subject, markDTO.StudentId);
             return Ok();
         }
         #endregion

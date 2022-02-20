@@ -44,7 +44,7 @@ namespace UniversityAPI.Controllers
         {
             _service.registerStudent(studentDTO);
             _mailSendler.SendMailForNewUsers(studentDTO.FirstName, studentDTO.LastName, studentDTO.Login);
-            return Ok("Registration is success.We've sent you email.Check your email address");
+            return Ok("Registration is success. We've sent you email. Check your email address");
         }
 
         [HttpPost("register/lecturer")]
@@ -52,7 +52,7 @@ namespace UniversityAPI.Controllers
         {
             _service.registerLecturer(lecturerDTO);
             _mailSendler.SendMailForNewUsers(lecturerDTO.FirstName, lecturerDTO.LastName, lecturerDTO.Login);            
-            return Ok("Registration is success.We've sent you email.Check your email address");
+            return Ok("Registration is success. We've sent you email. Check your email address");
         }
     }
 }
